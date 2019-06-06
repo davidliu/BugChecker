@@ -1,0 +1,27 @@
+def versions = [
+    gradleErrorProne: '0.7',
+    errorProne: "2.3.3", // The version of error prone running on this project
+    errorProneApi: "2.3.1", // The version of error prone built against and shipped
+]
+
+def libs = [
+            autoService: "com.google.auto.service:auto-service:1.0-rc5",
+            autoServiceAnnotation: "com.google.auto.service:auto-service-annotations:1.0-rc5",
+            errorProneCheckApi: "com.google.errorprone:error_prone_check_api:${versions.errorProneApi}",
+            errorProneCore: "com.google.errorprone:error_prone_core:${versions.errorProne}",
+            errorProneJavac: "com.google.errorprone:javac:9+181-r4173-1",
+            errorProneTestHelpers: "com.google.errorprone:error_prone_test_helpers:${versions.errorProne}",
+        ]
+
+
+def test = [
+        junit4: "junit:junit:4.12",
+]
+        
+ext {
+    evie = [
+        versions: versions,
+        libs: libs,
+        test: test,
+    ]
+}

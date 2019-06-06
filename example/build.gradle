@@ -1,0 +1,17 @@
+apply plugin: 'java'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':bugcheckerAnnotations')
+    //errorprone project(':bugchecker')
+    implementation "androidx.annotation:annotation:1.0.2"
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+
+tasks.withType(JavaCompile) {
+    // allow compilation for example.
+    //options.errorprone.check("CheckHasAnnotation", CheckSeverity.WARN)
+}

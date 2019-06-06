@@ -1,0 +1,18 @@
+apply plugin: 'java'
+import net.ltgt.gradle.errorprone.CheckSeverity
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    errorprone project(':bugchecker')
+    implementation project(":example")
+    implementation "androidx.annotation:annotation:1.0.2"
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+
+tasks.withType(JavaCompile) {
+    // allow compilation for example.
+    options.errorprone.check("CheckHasAnnotation", CheckSeverity.WARN)
+}

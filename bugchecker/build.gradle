@@ -1,0 +1,37 @@
+plugins {
+    id "java"
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly evie.libs.autoServiceAnnotation
+    annotationProcessor evie.libs.autoService
+
+    compileOnly evie.libs.errorProneCheckApi
+
+    testCompile evie.test.junit4
+    testCompile(evie.libs.errorProneTestHelpers) {
+        exclude group: "junit", module: "junit"
+    }
+    compile project(':bugcheckerAnnotations')
+    testCompile project(":example")
+}
+
+
+test {
+    maxHeapSize = "1024m"
+    if (!JavaVersion.current().java9Compatible) {
+
+        println "-Xbootclasspath/p:${configurations.errorproneJavac.asPath}"
+        jvmArgs "-Xbootclasspath/p:${configurations.errorproneJavac.asPath}"
+
+    }
+}
